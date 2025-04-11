@@ -1,0 +1,39 @@
+module custom_conditioner #(
+    MIN_DELAY = 200 : MIN_DELAY > 0,     // delay for input or output in ms
+    CLK_FREQ ~ 100_000_000
+) (
+    input clk,
+    input rst,
+    input in,
+    output out
+) {
+
+    .clk(clk) {
+        dff delay[$clog2(CLK_FREQ*MIN_DELAY/1000)]
+        .rst(rst) {
+            dff button_state
+        }
+    }
+
+
+    always {
+    
+        delay.d = delay.q
+        button_state.d = button_state.q
+    
+        if (button_state.q) {
+            if (~in && &delay.q) {
+                button_state.d = 0
+            } else if (~&delay.q) {
+                delay.d = delay.q + 1
+            }
+        } else {
+            if (in && ~|delay.q) {
+                button_state.d = 1
+            } else if (|delay.q) {
+                delay.d = delay.q - 1
+            }
+        }
+        out = button_state.q
+    }
+}

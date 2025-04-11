@@ -12,42 +12,24 @@ module rca #(
         input wire cin,
         output reg [(SIZE)-1:0] s
     );
-<<<<<<< HEAD
-    logic [31:0] R_5c7df85f_i;
-    logic [31:0] RR_5c7df85f_i;
-=======
-    logic [31:0] R_427243a7_i;
-    logic [31:0] RR_427243a7_i;
->>>>>>> main
+    logic [31:0] R_164dff2a_i;
+    logic [31:0] RR_164dff2a_i;
     logic [(SIZE)-1:0] M_fa_a;
     logic [(SIZE)-1:0] M_fa_b;
     logic [(SIZE)-1:0] M_fa_cin;
     logic [(SIZE)-1:0] M_fa_s;
     logic [(SIZE)-1:0] M_fa_cout;
     
-<<<<<<< HEAD
-    genvar idx_0_686057198;
+    genvar idx_0_1313500343;
     
     generate
-        for (idx_0_686057198 = 0; idx_0_686057198 < SIZE; idx_0_686057198 = idx_0_686057198 + 1) begin: forLoop_idx_0_686057198
+        for (idx_0_1313500343 = 0; idx_0_1313500343 < SIZE; idx_0_1313500343 = idx_0_1313500343 + 1) begin: forLoop_idx_0_1313500343
             fa fa (
-                .a(M_fa_a[idx_0_686057198]),
-                .b(M_fa_b[idx_0_686057198]),
-                .cin(M_fa_cin[idx_0_686057198]),
-                .s(M_fa_s[idx_0_686057198]),
-                .cout(M_fa_cout[idx_0_686057198])
-=======
-    genvar idx_0_1692165820;
-    
-    generate
-        for (idx_0_1692165820 = 0; idx_0_1692165820 < SIZE; idx_0_1692165820 = idx_0_1692165820 + 1) begin: forLoop_idx_0_1692165820
-            fa fa (
-                .a(M_fa_a[idx_0_1692165820]),
-                .b(M_fa_b[idx_0_1692165820]),
-                .cin(M_fa_cin[idx_0_1692165820]),
-                .s(M_fa_s[idx_0_1692165820]),
-                .cout(M_fa_cout[idx_0_1692165820])
->>>>>>> main
+                .a(M_fa_a[idx_0_1313500343]),
+                .b(M_fa_b[idx_0_1313500343]),
+                .cin(M_fa_cin[idx_0_1313500343]),
+                .s(M_fa_s[idx_0_1313500343]),
+                .cout(M_fa_cout[idx_0_1313500343])
             );
         end
     endgenerate
@@ -57,15 +39,9 @@ module rca #(
         M_fa_a = a;
         M_fa_b = b;
         M_fa_cin[1'h0] = cin;
-<<<<<<< HEAD
-        for (RR_5c7df85f_i = 0; RR_5c7df85f_i < SIZE - 1'h1; RR_5c7df85f_i = RR_5c7df85f_i + 1) begin
-      R_5c7df85f_i = (1'h1) + RR_5c7df85f_i * (1);
-            M_fa_cin[R_5c7df85f_i] = M_fa_cout[R_5c7df85f_i - 1'h1];
-=======
-        for (RR_427243a7_i = 0; RR_427243a7_i < SIZE - 1'h1; RR_427243a7_i = RR_427243a7_i + 1) begin
-      R_427243a7_i = (1'h1) + RR_427243a7_i * (1);
-            M_fa_cin[R_427243a7_i] = M_fa_cout[R_427243a7_i - 1'h1];
->>>>>>> main
+        for (RR_164dff2a_i = 0; RR_164dff2a_i < SIZE - 1'h1; RR_164dff2a_i = RR_164dff2a_i + 1) begin
+      R_164dff2a_i = (1'h1) + RR_164dff2a_i * (1);
+            M_fa_cin[R_164dff2a_i] = M_fa_cout[R_164dff2a_i - 1'h1];
         end
         s = M_fa_s;
     end

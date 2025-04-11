@@ -14,31 +14,17 @@ module multi_seven_seg #(
         output reg [11:0] out
     );
     localparam DIGIT_BITS = $clog2(DIGITS);
-<<<<<<< HEAD
-    localparam _MP_SIZE_756596177 = DIGIT_BITS;
-    localparam _MP_DIV_756596177 = DIV;
-    localparam _MP_TOP_756596177 = DIGITS - 1'h1;
-    localparam _MP_UP_756596177 = 1'h1;
-    logic [(_MP_SIZE_756596177)-1:0] M_ctr_value;
+    localparam _MP_SIZE_2015300790 = DIGIT_BITS;
+    localparam _MP_DIV_2015300790 = DIV;
+    localparam _MP_TOP_2015300790 = DIGITS - 1'h1;
+    localparam _MP_UP_2015300790 = 1'h1;
+    logic [(_MP_SIZE_2015300790)-1:0] M_ctr_value;
     
     counter #(
-        .SIZE(_MP_SIZE_756596177),
-        .DIV(_MP_DIV_756596177),
-        .TOP(_MP_TOP_756596177),
-        .UP(_MP_UP_756596177)
-=======
-    localparam _MP_SIZE_1085479185 = DIGIT_BITS;
-    localparam _MP_DIV_1085479185 = DIV;
-    localparam _MP_TOP_1085479185 = DIGITS - 1'h1;
-    localparam _MP_UP_1085479185 = 1'h1;
-    logic [(_MP_SIZE_1085479185)-1:0] M_ctr_value;
-    
-    counter #(
-        .SIZE(_MP_SIZE_1085479185),
-        .DIV(_MP_DIV_1085479185),
-        .TOP(_MP_TOP_1085479185),
-        .UP(_MP_UP_1085479185)
->>>>>>> main
+        .SIZE(_MP_SIZE_2015300790),
+        .DIV(_MP_DIV_2015300790),
+        .TOP(_MP_TOP_2015300790),
+        .UP(_MP_UP_2015300790)
     ) ctr (
         .clk(clk),
         .rst(rst),
@@ -46,24 +32,14 @@ module multi_seven_seg #(
     );
     
     
-<<<<<<< HEAD
-    localparam _MP_DIGITS_285282839 = 3'h4;
-    localparam _MP_LEADING_ZEROS_285282839 = 1'h1;
-=======
-    localparam _MP_DIGITS_1594034847 = 3'h4;
-    localparam _MP_LEADING_ZEROS_1594034847 = 1'h1;
->>>>>>> main
+    localparam _MP_DIGITS_23031044 = 3'h4;
+    localparam _MP_LEADING_ZEROS_23031044 = 1'h1;
     logic [13:0] M_decimal_renderer_value;
     logic [3:0][3:0] M_decimal_renderer_digits;
     
     bin_to_dec #(
-<<<<<<< HEAD
-        .DIGITS(_MP_DIGITS_285282839),
-        .LEADING_ZEROS(_MP_LEADING_ZEROS_285282839)
-=======
-        .DIGITS(_MP_DIGITS_1594034847),
-        .LEADING_ZEROS(_MP_LEADING_ZEROS_1594034847)
->>>>>>> main
+        .DIGITS(_MP_DIGITS_23031044),
+        .LEADING_ZEROS(_MP_LEADING_ZEROS_23031044)
     ) decimal_renderer (
         .value(M_decimal_renderer_value),
         .digits(M_decimal_renderer_digits)

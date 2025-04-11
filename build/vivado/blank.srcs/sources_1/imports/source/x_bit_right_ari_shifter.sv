@@ -12,36 +12,20 @@ module x_bit_right_ari_shifter #(
         input wire pad,
         output reg [31:0] out
     );
-<<<<<<< HEAD
-    logic [31:0] R_5d31350d_i;
-    logic [31:0] RR_5d31350d_i;
-=======
-    logic [31:0] R_35c5b2ff_i;
-    logic [31:0] RR_35c5b2ff_i;
->>>>>>> main
+    logic [31:0] R_301aed10_i;
+    logic [31:0] RR_301aed10_i;
     logic [31:0] M_mux_32_s0;
     logic [31:0][1:0] M_mux_32_in;
     logic [31:0] M_mux_32_out;
     
-<<<<<<< HEAD
-    genvar idx_0_538645628;
+    genvar idx_0_1697849231;
     
     generate
-        for (idx_0_538645628 = 0; idx_0_538645628 < 32; idx_0_538645628 = idx_0_538645628 + 1) begin: forLoop_idx_0_538645628
+        for (idx_0_1697849231 = 0; idx_0_1697849231 < 32; idx_0_1697849231 = idx_0_1697849231 + 1) begin: forLoop_idx_0_1697849231
             mux_2 mux_32 (
-                .s0(M_mux_32_s0[idx_0_538645628]),
-                .in(M_mux_32_in[idx_0_538645628]),
-                .out(M_mux_32_out[idx_0_538645628])
-=======
-    genvar idx_0_158770832;
-    
-    generate
-        for (idx_0_158770832 = 0; idx_0_158770832 < 32; idx_0_158770832 = idx_0_158770832 + 1) begin: forLoop_idx_0_158770832
-            mux_2 mux_32 (
-                .s0(M_mux_32_s0[idx_0_158770832]),
-                .in(M_mux_32_in[idx_0_158770832]),
-                .out(M_mux_32_out[idx_0_158770832])
->>>>>>> main
+                .s0(M_mux_32_s0[idx_0_1697849231]),
+                .in(M_mux_32_in[idx_0_1697849231]),
+                .out(M_mux_32_out[idx_0_1697849231])
             );
         end
     endgenerate
@@ -51,17 +35,10 @@ module x_bit_right_ari_shifter #(
     always @* begin
         shifted_bits = {{SHIFT{pad}}, a[5'h1f:SHIFT]};
         M_mux_32_s0 = {6'h20{shift}};
-<<<<<<< HEAD
-        for (RR_5d31350d_i = 0; RR_5d31350d_i < 6'h20; RR_5d31350d_i = RR_5d31350d_i + 1) begin
-      R_5d31350d_i = (0) + RR_5d31350d_i * (1);
-            M_mux_32_in[R_5d31350d_i][1'h0] = a[R_5d31350d_i];
-            M_mux_32_in[R_5d31350d_i][1'h1] = shifted_bits[R_5d31350d_i];
-=======
-        for (RR_35c5b2ff_i = 0; RR_35c5b2ff_i < 6'h20; RR_35c5b2ff_i = RR_35c5b2ff_i + 1) begin
-      R_35c5b2ff_i = (0) + RR_35c5b2ff_i * (1);
-            M_mux_32_in[R_35c5b2ff_i][1'h0] = a[R_35c5b2ff_i];
-            M_mux_32_in[R_35c5b2ff_i][1'h1] = shifted_bits[R_35c5b2ff_i];
->>>>>>> main
+        for (RR_301aed10_i = 0; RR_301aed10_i < 6'h20; RR_301aed10_i = RR_301aed10_i + 1) begin
+      R_301aed10_i = (0) + RR_301aed10_i * (1);
+            M_mux_32_in[R_301aed10_i][1'h0] = a[R_301aed10_i];
+            M_mux_32_in[R_301aed10_i][1'h1] = shifted_bits[R_301aed10_i];
         end
         out = M_mux_32_out;
     end

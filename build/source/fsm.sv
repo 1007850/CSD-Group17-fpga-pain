@@ -151,90 +151,6 @@ module fsm (
     localparam E_States_B_RIGHT_MOVE_CURSOR = 8'h5f;
     localparam E_States_B_RIGHT_STORE_PIXEL = 8'h60;
     localparam E_States_B_RIGHT_CURSOR_COLOUR = 8'h61;
-<<<<<<< HEAD
-    localparam E_States_GAME_IDLE = 8'h62;
-    localparam E_States_TIMER_M1 = 8'h63;
-    localparam E_States_END_GAME = 8'h64;
-    localparam E_States_GAME_IDLE_READ_CURR_PIXEL_VALUE = 8'h65;
-    localparam E_States_RESET_SR_POINTERS = 8'h66;
-    localparam E_States_SR_00_ALL_SR = 8'h67;
-    localparam E_States_SR_LOAD_TOP_MID = 8'h68;
-    localparam E_States_SR_LOAD_TOP_RIGHT = 8'h69;
-    localparam E_States_SR_LOAD_MID_MID = 8'h6a;
-    localparam E_States_SR_LOAD_MID_RIGHT = 8'h6b;
-    localparam E_States_SR_LOAD_BOT_MID = 8'h6c;
-    localparam E_States_SR_LOAD_BOT_RIGHT = 8'h6d;
-    localparam E_States_READ_BRAM = 8'h6e;
-    localparam E_States_RB_LOAD_TOP_RIGHT = 8'h6f;
-    localparam E_States_RB_LOAD_MID_RIGHT = 8'h70;
-    localparam E_States_RB_LOAD_BOT_RIGHT = 8'h71;
-    localparam E_States_READ_CURR_PIXEL_VALUE_00_ALL_SR = 8'h72;
-    localparam E_States_READ_TOP_LEFT = 8'h73;
-    localparam E_States_TOP_LEFT_ADD_A_NEIGHBOUR = 8'h74;
-    localparam E_States_TOP_LEFT_ADD_B_NEIGHBOUR = 8'h75;
-    localparam E_States_READ_TOP_MID = 8'h76;
-    localparam E_States_TOP_MID_ADD_A_NEIGHBOUR = 8'h77;
-    localparam E_States_TOP_MID_ADD_B_NEIGHBOUR = 8'h78;
-    localparam E_States_READ_TOP_RIGHT = 8'h79;
-    localparam E_States_TOP_RIGHT_ADD_A_NEIGHBOUR = 8'h7a;
-    localparam E_States_TOP_RIGHT_ADD_B_NEIGHBOUR = 8'h7b;
-    localparam E_States_READ_MID_LEFT = 8'h7c;
-    localparam E_States_MID_LEFT_ADD_A_NEIGHBOUR = 8'h7d;
-    localparam E_States_MID_LEFT_ADD_B_NEIGHBOUR = 8'h7e;
-    localparam E_States_READ_TARGET_PIXEL = 8'h7f;
-    localparam E_States_READ_MID_RIGHT = 8'h80;
-    localparam E_States_MID_RIGHT_ADD_A_NEIGHBOUR = 8'h81;
-    localparam E_States_MID_RIGHT_ADD_B_NEIGHBOUR = 8'h82;
-    localparam E_States_READ_BOT_LEFT = 8'h83;
-    localparam E_States_BOT_LEFT_ADD_A_NEIGHBOUR = 8'h84;
-    localparam E_States_BOT_LEFT_ADD_B_NEIGHBOUR = 8'h85;
-    localparam E_States_READ_BOT_MID = 8'h86;
-    localparam E_States_BOT_MID_ADD_A_NEIGHBOUR = 8'h87;
-    localparam E_States_BOT_MID_ADD_B_NEIGHBOUR = 8'h88;
-    localparam E_States_READ_BOT_RIGHT = 8'h89;
-    localparam E_States_BOT_RIGHT_ADD_A_NEIGHBOUR = 8'h8a;
-    localparam E_States_BOT_RIGHT_ADD_B_NEIGHBOUR = 8'h8b;
-    localparam E_States_SR_EMPTY_READ_1 = 8'h8c;
-    localparam E_States_SR_EMPTY_READ_2 = 8'h8d;
-    localparam E_States_CHECK_NEIGHBOURS = 8'h8e;
-    localparam E_States_B00_CHECK_A_NEIGHBOURS_EQ_B_NEIGHBOURS = 8'h8f;
-    localparam E_States_B00_CHECK_A_NEIGHBOUR_EQ_3 = 8'h90;
-    localparam E_States_B00_CHECK_B_NEIGHBOUR_EQ_3 = 8'h91;
-    localparam E_States_B00_A_COUNTP1 = 8'h92;
-    localparam E_States_B00_B_COUNTP1 = 8'h93;
-    localparam E_States_B10_CHECK_A_NEIGHBOUR_LE_B_NEIGHBOUR = 8'h94;
-    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_2 = 8'h95;
-    localparam E_States_B10_CHECK_B_NEIGHBOUR_EQ_3 = 8'h96;
-    localparam E_States_B10_B_COUNTM1 = 8'h97;
-    localparam E_States_B01_CHECK_B_NEIGHBOUR_LE_A_NEIGHBOUR = 8'h98;
-    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_2 = 8'h99;
-    localparam E_States_B01_CHECK_A_NEIGHBOUR_EQ_3 = 8'h9a;
-    localparam E_States_B01_A_COUNTM1 = 8'h9b;
-    localparam E_States_SET_A = 8'h9c;
-    localparam E_States_SET_B = 8'h9d;
-    localparam E_States_SET_00 = 8'h9e;
-    localparam E_States_RESET_A_NEIGHBOUR = 8'h9f;
-    localparam E_States_RESET_B_NEIGHBOUR = 8'ha0;
-    localparam E_States_MOVE_PIXEL_ADDRESS = 8'ha1;
-    localparam E_States_CHECK_AT_LAST_PIXEL = 8'ha2;
-    localparam E_States_SWITCH_BRAM = 8'ha3;
-    localparam E_States_SET_PIXEL_TO_BEGINNING = 8'ha4;
-    localparam E_States_SET_BRAM_SELECTOR_TO_1 = 8'ha5;
-    localparam E_States_SET_PIXEL_ADDRESS_TO_0 = 8'ha6;
-    localparam E_States_ZERO_BRAM = 8'ha7;
-    localparam E_States_CHECK_ADDRESS_AT_MAX = 8'ha8;
-    localparam E_States_SET_TIMER = 8'ha9;
-    localparam E_States_RESET_PIXEL_VALUE = 8'haa;
-    localparam E_States_RESET_PIXEL_ADDRESS = 8'hab;
-    localparam E_States_SET_SELECTOR_PIXEL_STATE = 8'hac;
-    localparam E_States_SET_B_LOW = 8'had;
-    localparam E_States_SET_B_HIGH = 8'hae;
-    localparam E_States_COMPUTE = 8'haf;
-    localparam E_States_AUTO = 8'hb0;
-    localparam E_States_IDLE = 8'hb1;
-    localparam _MP_RISE_1554752424 = 1'h1;
-    localparam _MP_FALL_1554752424 = 1'h0;
-=======
     localparam E_States_REMOVE_CURSOR = 8'h62;
     localparam E_States_RESET_PIXEL_TO_0 = 8'h63;
     localparam E_States_GAME_IDLE = 8'h64;
@@ -317,20 +233,14 @@ module fsm (
     localparam E_States_COMPUTE = 8'hb1;
     localparam E_States_AUTO = 8'hb2;
     localparam E_States_IDLE = 8'hb3;
-    localparam _MP_RISE_1440629071 = 1'h1;
-    localparam _MP_FALL_1440629071 = 1'h0;
->>>>>>> main
+    localparam _MP_RISE_1618004899 = 1'h1;
+    localparam _MP_FALL_1618004899 = 1'h0;
     logic M_accel_edge_in;
     logic M_accel_edge_out;
     
     edge_detector #(
-<<<<<<< HEAD
-        .RISE(_MP_RISE_1554752424),
-        .FALL(_MP_FALL_1554752424)
-=======
-        .RISE(_MP_RISE_1440629071),
-        .FALL(_MP_FALL_1440629071)
->>>>>>> main
+        .RISE(_MP_RISE_1618004899),
+        .FALL(_MP_FALL_1618004899)
     ) accel_edge (
         .clk(clk),
         .in(M_accel_edge_in),
