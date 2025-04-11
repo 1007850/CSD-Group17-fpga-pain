@@ -11,6 +11,7 @@ module shifter (
         output reg [31:0] shift,
         output reg illop
     );
+<<<<<<< HEAD
     logic [31:0] R_23fc4582_i;
     logic [31:0] RR_23fc4582_i;
     logic [31:0] R_57ee9e2a_i;
@@ -18,11 +19,21 @@ module shifter (
     logic [31:0] R_650eb300_i;
     logic [31:0] RR_650eb300_i;
     localparam logic [4:0][4:0] _MP_SHIFT_465719574 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+=======
+    logic [31:0] R_5593317c_i;
+    logic [31:0] RR_5593317c_i;
+    logic [31:0] R_07c4b3d7_i;
+    logic [31:0] RR_07c4b3d7_i;
+    logic [31:0] R_291bcc21_i;
+    logic [31:0] RR_291bcc21_i;
+    localparam logic [4:0][4:0] _MP_SHIFT_1477883196 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+>>>>>>> main
     logic [4:0][31:0] M_xbls_a;
     logic [4:0] M_xbls_shift;
     logic [4:0] M_xbls_pad;
     logic [4:0][31:0] M_xbls_out;
     
+<<<<<<< HEAD
     genvar idx_0_465719574;
     
     generate
@@ -34,17 +45,35 @@ module shifter (
                 .shift(M_xbls_shift[idx_0_465719574]),
                 .pad(M_xbls_pad[idx_0_465719574]),
                 .out(M_xbls_out[idx_0_465719574])
+=======
+    genvar idx_0_1477883196;
+    
+    generate
+        for (idx_0_1477883196 = 0; idx_0_1477883196 < 5; idx_0_1477883196 = idx_0_1477883196 + 1) begin: forLoop_idx_0_1477883196
+            x_bit_left_shifter #(
+                .SHIFT(_MP_SHIFT_1477883196[idx_0_1477883196])
+            ) xbls (
+                .a(M_xbls_a[idx_0_1477883196]),
+                .shift(M_xbls_shift[idx_0_1477883196]),
+                .pad(M_xbls_pad[idx_0_1477883196]),
+                .out(M_xbls_out[idx_0_1477883196])
+>>>>>>> main
             );
         end
     endgenerate
     
     
+<<<<<<< HEAD
     localparam logic [4:0][4:0] _MP_SHIFT_996052186 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+=======
+    localparam logic [4:0][4:0] _MP_SHIFT_1404533509 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+>>>>>>> main
     logic [4:0][31:0] M_xbrs_a;
     logic [4:0] M_xbrs_shift;
     logic [4:0] M_xbrs_pad;
     logic [4:0][31:0] M_xbrs_out;
     
+<<<<<<< HEAD
     genvar idx_0_996052186;
     
     generate
@@ -56,17 +85,35 @@ module shifter (
                 .shift(M_xbrs_shift[idx_0_996052186]),
                 .pad(M_xbrs_pad[idx_0_996052186]),
                 .out(M_xbrs_out[idx_0_996052186])
+=======
+    genvar idx_0_1404533509;
+    
+    generate
+        for (idx_0_1404533509 = 0; idx_0_1404533509 < 5; idx_0_1404533509 = idx_0_1404533509 + 1) begin: forLoop_idx_0_1404533509
+            x_bit_right_shifter #(
+                .SHIFT(_MP_SHIFT_1404533509[idx_0_1404533509])
+            ) xbrs (
+                .a(M_xbrs_a[idx_0_1404533509]),
+                .shift(M_xbrs_shift[idx_0_1404533509]),
+                .pad(M_xbrs_pad[idx_0_1404533509]),
+                .out(M_xbrs_out[idx_0_1404533509])
+>>>>>>> main
             );
         end
     endgenerate
     
     
+<<<<<<< HEAD
     localparam logic [4:0][4:0] _MP_SHIFT_1382194420 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+=======
+    localparam logic [4:0][4:0] _MP_SHIFT_1859763438 = {{5'h10, 5'h8, 5'h4, 5'h2, 5'h1}};
+>>>>>>> main
     logic [4:0][31:0] M_xbras_a;
     logic [4:0] M_xbras_shift;
     logic [4:0] M_xbras_pad;
     logic [4:0][31:0] M_xbras_out;
     
+<<<<<<< HEAD
     genvar idx_0_1382194420;
     
     generate
@@ -78,6 +125,19 @@ module shifter (
                 .shift(M_xbras_shift[idx_0_1382194420]),
                 .pad(M_xbras_pad[idx_0_1382194420]),
                 .out(M_xbras_out[idx_0_1382194420])
+=======
+    genvar idx_0_1859763438;
+    
+    generate
+        for (idx_0_1859763438 = 0; idx_0_1859763438 < 5; idx_0_1859763438 = idx_0_1859763438 + 1) begin: forLoop_idx_0_1859763438
+            x_bit_right_ari_shifter #(
+                .SHIFT(_MP_SHIFT_1859763438[idx_0_1859763438])
+            ) xbras (
+                .a(M_xbras_a[idx_0_1859763438]),
+                .shift(M_xbras_shift[idx_0_1859763438]),
+                .pad(M_xbras_pad[idx_0_1859763438]),
+                .out(M_xbras_out[idx_0_1859763438])
+>>>>>>> main
             );
         end
     endgenerate
@@ -93,6 +153,7 @@ module shifter (
         M_xbras_a = {{32'h0, 32'h0, 32'h0, 32'h0, 32'h0}};
         M_xbras_shift = 1'h0;
         M_xbras_pad = 1'h0;
+<<<<<<< HEAD
         for (RR_23fc4582_i = 0; RR_23fc4582_i < 3'h5; RR_23fc4582_i = RR_23fc4582_i + 1) begin
       R_23fc4582_i = (0) + RR_23fc4582_i * (1);
             if (R_23fc4582_i == 1'h0) begin
@@ -127,6 +188,42 @@ module shifter (
                 M_xbras_a[R_650eb300_i] = M_xbras_out[R_650eb300_i - 1'h1];
                 M_xbras_shift[R_650eb300_i] = b[R_650eb300_i];
                 M_xbras_pad[R_650eb300_i] = a[5'h1f];
+=======
+        for (RR_5593317c_i = 0; RR_5593317c_i < 3'h5; RR_5593317c_i = RR_5593317c_i + 1) begin
+      R_5593317c_i = (0) + RR_5593317c_i * (1);
+            if (R_5593317c_i == 1'h0) begin
+                M_xbls_a[R_5593317c_i] = a;
+                M_xbls_shift[R_5593317c_i] = b[R_5593317c_i];
+                M_xbls_pad[R_5593317c_i] = 1'h0;
+            end else begin
+                M_xbls_a[R_5593317c_i] = M_xbls_out[R_5593317c_i - 1'h1];
+                M_xbls_shift[R_5593317c_i] = b[R_5593317c_i];
+                M_xbls_pad[R_5593317c_i] = 1'h0;
+            end
+        end
+        for (RR_07c4b3d7_i = 0; RR_07c4b3d7_i < 3'h5; RR_07c4b3d7_i = RR_07c4b3d7_i + 1) begin
+      R_07c4b3d7_i = (0) + RR_07c4b3d7_i * (1);
+            if (R_07c4b3d7_i == 1'h0) begin
+                M_xbrs_a[R_07c4b3d7_i] = a;
+                M_xbrs_shift[R_07c4b3d7_i] = b[R_07c4b3d7_i];
+                M_xbrs_pad[R_07c4b3d7_i] = 1'h0;
+            end else begin
+                M_xbrs_a[R_07c4b3d7_i] = M_xbrs_out[R_07c4b3d7_i - 1'h1];
+                M_xbrs_shift[R_07c4b3d7_i] = b[R_07c4b3d7_i];
+                M_xbrs_pad[R_07c4b3d7_i] = 1'h0;
+            end
+        end
+        for (RR_291bcc21_i = 0; RR_291bcc21_i < 3'h5; RR_291bcc21_i = RR_291bcc21_i + 1) begin
+      R_291bcc21_i = (0) + RR_291bcc21_i * (1);
+            if (R_291bcc21_i == 1'h0) begin
+                M_xbras_a[R_291bcc21_i] = a;
+                M_xbras_shift[R_291bcc21_i] = b[R_291bcc21_i];
+                M_xbras_pad[R_291bcc21_i] = a[5'h1f];
+            end else begin
+                M_xbras_a[R_291bcc21_i] = M_xbras_out[R_291bcc21_i - 1'h1];
+                M_xbras_shift[R_291bcc21_i] = b[R_291bcc21_i];
+                M_xbras_pad[R_291bcc21_i] = a[5'h1f];
+>>>>>>> main
             end
         end
         illop = 1'h0;

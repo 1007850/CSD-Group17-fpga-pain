@@ -11,6 +11,7 @@ module bin_to_dec #(
         input wire [($clog2((64'(4'ha) ** (DIGITS))))-1:0] value,
         output reg [(DIGITS)-1:0][3:0] digits
     );
+<<<<<<< HEAD
     logic [31:0] R_0ef47090_j;
     logic [31:0] RR_0ef47090_j;
     logic [31:0] R_20fee4f3_i;
@@ -44,6 +45,41 @@ module bin_to_dec #(
                         end
                     end
                     L_3e36c320_remainder = L_3e36c320_remainder - L_034b6f6d_sub_value;
+=======
+    logic [31:0] R_38f10bd8_j;
+    logic [31:0] RR_38f10bd8_j;
+    logic [31:0] R_7b9d45d6_i;
+    logic [31:0] RR_7b9d45d6_i;
+    logic [($bits(value))-1:0] L_3407eb12_remainder;
+    logic L_3407eb12_blank;
+    logic [($bits(value))-1:0] L_246e579b_scale;
+    logic [($bits(value))-1:0] L_0bc33b8c_sub_value;
+    always @* begin
+        digits = {DIGITS{{{4'hb}}}};
+        L_3407eb12_remainder = value;
+        L_3407eb12_blank = !LEADING_ZEROS;
+        if (value < (64'(4'ha) ** (DIGITS))) begin
+            for (RR_38f10bd8_j = 0; RR_38f10bd8_j < DIGITS; RR_38f10bd8_j = RR_38f10bd8_j + 1) begin
+        R_38f10bd8_j = (DIGITS - 1'h1) + RR_38f10bd8_j * (-2'sh1);
+                L_246e579b_scale = (64'(4'ha) ** (R_38f10bd8_j));
+                if (L_3407eb12_remainder < L_246e579b_scale) begin
+                    if (R_38f10bd8_j != 1'h0 && L_3407eb12_blank) begin
+                        digits[R_38f10bd8_j] = 4'ha;
+                    end else begin
+                        digits[R_38f10bd8_j] = 1'h0;
+                    end
+                end else begin
+                    L_3407eb12_blank = 1'h0;
+                    L_0bc33b8c_sub_value = 1'h0;
+                    for (RR_7b9d45d6_i = 0; RR_7b9d45d6_i < 4'h9; RR_7b9d45d6_i = RR_7b9d45d6_i + 1) begin
+            R_7b9d45d6_i = (4'h9) + RR_7b9d45d6_i * (-2'sh1);
+                        if (L_3407eb12_remainder < (R_7b9d45d6_i + 1'h1) * L_246e579b_scale) begin
+                            digits[R_38f10bd8_j] = R_7b9d45d6_i;
+                            L_0bc33b8c_sub_value = R_7b9d45d6_i * L_246e579b_scale;
+                        end
+                    end
+                    L_3407eb12_remainder = L_3407eb12_remainder - L_0bc33b8c_sub_value;
+>>>>>>> main
                 end
             end
         end
