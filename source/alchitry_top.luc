@@ -47,7 +47,7 @@ module alchitry_top (
         // button conditioners
         button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{1500}}),#NUM_SYNC(4x{{3}}))
         button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}),#MIN_DELAY(2x{{1500}}),#NUM_SYNC(2x{{3}}))
-        // button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(1500),#NUM_SYNC(3))
+        button_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(1500),#NUM_SYNC(3))
         
         // button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}))
         // button_conditioner cond_butt_sel_desel[2](#CLK_FREQ(2x{{CLK}}))
@@ -68,7 +68,7 @@ module alchitry_top (
         .rst(rst) {
         
             // testing conditioner
-            custom_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(1000))
+            // custom_conditioner cond_butt_next_play(#CLK_FREQ(CLK),#MIN_DELAY(1000))
         
             // display driver
             display_driver display(#CLK_FREQ(CLK))
