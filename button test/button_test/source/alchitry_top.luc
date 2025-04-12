@@ -14,7 +14,7 @@ module alchitry_top (
         // The reset conditioner is used to synchronize the reset signal to the FPGA
         // clock. This ensures the entire FPGA comes out of reset at the same time.
         reset_conditioner reset_cond
-        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{1000}}),#NUM_SYNC(4x{{3}}))
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{200}}),#NUM_SYNC(4x{{3}}))
         edge_detector butt_edge(#RISE(1),#FALL(0))
         .rst(rst) {
             dff count[7]
