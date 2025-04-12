@@ -1,0 +1,42 @@
+module alchitry_top (
+    input clk,              // 100MHz clock
+    input rst_n,            // reset button (active low)
+    input butt_dirs[4],
+    output led[8],          // 8 user controllable LEDs
+    input usb_rx,           // USB->Serial input
+    output usb_tx           // USB->Serial output
+) {
+
+    sig rst                 // reset signal
+    const CLK = 10_000_000
+
+    .clk(clk) {
+        // The reset conditioner is used to synchronize the reset signal to the FPGA
+        // clock. This ensures the entire FPGA comes out of reset at the same time.
+        reset_conditioner reset_cond
+        button_conditioner cond_butt_dirs[4](#CLK_FREQ(4x{{CLK}}),#MIN_DELAY(4x{{1000}}),#NUM_SYNC(4x{{3}}))
+        edge_detector butt_edge(#RISE(1),#FALL(0))
+        .rst(rst) {
+            dff count[7]
+        }
+    }
+
+    always {
+        reset_cond.in = ~rst_n  // input raw inverted reset signal
+        rst = reset_cond.out    // conditioned reset
+
+        led = 8h00              // turn LEDs off
+
+        usb_tx = usb_rx         // echo the serial data
+        
+        cond_butt_dirs.in = ~butt_dirs
+        butt_edge.in = cond_butt_dirs.out[0]
+        if (butt_edge.out) {
+            count.d = count.q + 1
+        } else {
+            count.d = count.q
+        }
+        led[6:0] = count.q
+        led[7] = cond_butt_dirs.out[0]
+    }
+}
