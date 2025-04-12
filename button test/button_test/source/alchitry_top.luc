@@ -8,7 +8,7 @@ module alchitry_top (
 ) {
 
     sig rst                 // reset signal
-    const CLK = 10_000_000
+    const CLK = 100_000_000
 
     .clk(clk) {
         // The reset conditioner is used to synchronize the reset signal to the FPGA

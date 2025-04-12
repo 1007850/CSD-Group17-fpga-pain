@@ -13,13 +13,13 @@ module alchitry_top (
         output reg usb_tx
     );
     logic rst;
-    localparam CLK = 24'h989680;
-    localparam _MP_STAGES_1191865356 = 3'h4;
+    localparam CLK = 27'h5f5e100;
+    localparam _MP_STAGES_2091947700 = 3'h4;
     logic M_reset_cond_in;
     logic M_reset_cond_out;
     
     reset_conditioner #(
-        .STAGES(_MP_STAGES_1191865356)
+        .STAGES(_MP_STAGES_2091947700)
     ) reset_cond (
         .clk(clk),
         .in(M_reset_cond_in),
@@ -27,37 +27,37 @@ module alchitry_top (
     );
     
     
-    localparam logic [3:0][23:0] _MP_CLK_FREQ_143848804 = {{24'h989680, 24'h989680, 24'h989680, 24'h989680}};
-    localparam logic [3:0][7:0] _MP_MIN_DELAY_143848804 = {{8'hc8, 8'hc8, 8'hc8, 8'hc8}};
-    localparam logic [3:0][1:0] _MP_NUM_SYNC_143848804 = {{2'h3, 2'h3, 2'h3, 2'h3}};
+    localparam logic [3:0][26:0] _MP_CLK_FREQ_1459356871 = {{27'h5f5e100, 27'h5f5e100, 27'h5f5e100, 27'h5f5e100}};
+    localparam logic [3:0][7:0] _MP_MIN_DELAY_1459356871 = {{8'hc8, 8'hc8, 8'hc8, 8'hc8}};
+    localparam logic [3:0][1:0] _MP_NUM_SYNC_1459356871 = {{2'h3, 2'h3, 2'h3, 2'h3}};
     logic [3:0] M_cond_butt_dirs_in;
     logic [3:0] M_cond_butt_dirs_out;
     
-    genvar idx_0_143848804;
+    genvar idx_0_1459356871;
     
     generate
-        for (idx_0_143848804 = 0; idx_0_143848804 < 4; idx_0_143848804 = idx_0_143848804 + 1) begin: forLoop_idx_0_143848804
+        for (idx_0_1459356871 = 0; idx_0_1459356871 < 4; idx_0_1459356871 = idx_0_1459356871 + 1) begin: forLoop_idx_0_1459356871
             button_conditioner #(
-                .CLK_FREQ(_MP_CLK_FREQ_143848804[idx_0_143848804]),
-                .MIN_DELAY(_MP_MIN_DELAY_143848804[idx_0_143848804]),
-                .NUM_SYNC(_MP_NUM_SYNC_143848804[idx_0_143848804])
+                .CLK_FREQ(_MP_CLK_FREQ_1459356871[idx_0_1459356871]),
+                .MIN_DELAY(_MP_MIN_DELAY_1459356871[idx_0_1459356871]),
+                .NUM_SYNC(_MP_NUM_SYNC_1459356871[idx_0_1459356871])
             ) cond_butt_dirs (
                 .clk(clk),
-                .in(M_cond_butt_dirs_in[idx_0_143848804]),
-                .out(M_cond_butt_dirs_out[idx_0_143848804])
+                .in(M_cond_butt_dirs_in[idx_0_1459356871]),
+                .out(M_cond_butt_dirs_out[idx_0_1459356871])
             );
         end
     endgenerate
     
     
-    localparam _MP_RISE_1770040315 = 1'h1;
-    localparam _MP_FALL_1770040315 = 1'h0;
+    localparam _MP_RISE_605089085 = 1'h1;
+    localparam _MP_FALL_605089085 = 1'h0;
     logic M_butt_edge_in;
     logic M_butt_edge_out;
     
     edge_detector #(
-        .RISE(_MP_RISE_1770040315),
-        .FALL(_MP_FALL_1770040315)
+        .RISE(_MP_RISE_605089085),
+        .FALL(_MP_FALL_605089085)
     ) butt_edge (
         .clk(clk),
         .in(M_butt_edge_in),
