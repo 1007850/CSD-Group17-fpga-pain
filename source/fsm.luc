@@ -128,13 +128,10 @@ module fsm #(
         dff decrease_timer
         dff game_tick
 
-        dff accel_selector[2]   // select clock for inputclk
-        dff accel_timer[4]      // timer for interval between acceleration
-        dff accel[4]            // bits selected for acceleration
-        dff accel_edge_buff     // buffer dff for edge
-        
-        // dff alu_buffer[2]
-        edge_detector accel_edge(#RISE(0),#FALL(1))
+        dff accel_timer[4]      // Timer for interval between acceleration
+        dff accel_counter[4]    // Counter for movement timing
+        dff accel_level[2]      // Current acceleration level
+        dff accel_edge_buff     // Buffer for movement timing
 
         .rst(rst) {
             dff states[$width(States)](#INIT(States.SET_BRAM_SELECTOR_TO_1))
@@ -209,24 +206,21 @@ module fsm #(
             game_tick.d = 1
         }
         
-        // input acceleration selector
-        case (accel_selector.q) {
-            b00: accel_edge.in = accel.q[3]     // default slow
-            b01: accel_edge.in = accel.q[2]     // medium
-            b10: accel_edge.in = accel.q[0]     // fast
-            default: accel_edge.in = accel.q[3]
+        // Acceleration control logic
+        accel_counter.d = accel_counter.q + 1;  // Always increment counter
+
+        // Determine when to move based on accel_level
+        case (accel_level.q) {
+            b00: accel_edge_buff.d = (accel_counter.q == b1111);  // Slow (every 16 cycles)
+            b01: accel_edge_buff.d = (accel_counter.q[2:0] == b111);  // Medium (every 8 cycles)
+            b10: accel_edge_buff.d = (accel_counter.q[1:0] == b11);  // Fast (every 4 cycles)
+            default: accel_edge_buff.d = (accel_counter.q == b1111);
         }
-        case (accel_timer.q) {
-            b0001: accel_selector.d = b01
-            b0100: accel_selector.d = b10
-            default: accel_selector.d = accel_selector.q
+
+        // Reset counter when it's time to move
+        if (accel_edge_buff.d) {
+            accel_counter.d = b0000;
         }
-        if (med_inputclk) {
-            accel.d = accel.q + 1
-        } else {
-            accel.d = accel.q
-        }
-        accel_edge_buff.d = accel_edge.out
         
         case (states.q) {
 
@@ -430,17 +424,23 @@ module fsm #(
             States.A_UP_CLK:
                 if (move_up_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.A_UP_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.A_UP_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.A_UP_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.A_UP_DIR_IDLE;
                 }
                 // debugging
                 debug_dff.d = 255
@@ -564,17 +564,23 @@ module fsm #(
             States.A_DOWN_CLK:
                 if (move_down_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.A_DOWN_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.A_DOWN_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.A_DOWN_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.A_DOWN_DIR_IDLE;
                 }
                 // debugging
                 debug_dff.d = 255
@@ -702,17 +708,23 @@ module fsm #(
             States.A_LEFT_CLK:
                 if (move_left_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.A_LEFT_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.A_LEFT_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.A_LEFT_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.A_LEFT_DIR_IDLE;
                 }
                 // debugging
                 debug_dff.d = 255
@@ -838,17 +850,23 @@ module fsm #(
             States.A_RIGHT_CLK:
                 if (move_right_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.A_RIGHT_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.A_RIGHT_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.A_RIGHT_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.A_RIGHT_DIR_IDLE;
                 }
 
             States.A_RIGHT_COUNTP1:
@@ -1046,17 +1064,23 @@ module fsm #(
             States.B_UP_CLK:
                 if (move_up_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.B_UP_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.B_UP_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.B_UP_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.B_UP_DIR_IDLE;
                 }
 
             States.B_UP_COUNTP1:
@@ -1177,17 +1201,23 @@ module fsm #(
             States.B_DOWN_CLK:
                 if (move_down_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.B_DOWN_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.B_DOWN_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.B_DOWN_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.B_DOWN_DIR_IDLE;
                 }
 
             States.B_DOWN_COUNTP1:
@@ -1309,17 +1339,23 @@ module fsm #(
             States.B_LEFT_CLK:
                 if (move_left_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.B_LEFT_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.B_LEFT_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.B_LEFT_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.B_LEFT_DIR_IDLE;
                 }
 
             States.B_LEFT_COUNTP1:
@@ -1439,17 +1475,23 @@ module fsm #(
             States.B_RIGHT_CLK:
                 if (move_right_button) {
                     if (accel_edge_buff.q) {
+                        // Increment acceleration level after holding for some time
                         case (accel_timer.q) {
-                            b1111: accel_timer.d = accel_timer.q
-                            default: accel_timer.d = accel_timer.q + 1
+                            b0111: accel_level.d = b01;  // Switch to medium speed
+                            b1111: accel_level.d = b10;  // Switch to fast speed
+                            default: accel_timer.d = accel_timer.q + 1;
                         }
-                        accel.d = 0
-                        states.d = States.B_RIGHT_DIR_IDLE
+                        
+                        // Reset counter and proceed to next state
+                        accel_counter.d = 0;
+                        states.d = States.B_RIGHT_DIR_IDLE;
                     }
                 } else {
-                    accel_timer.d = 0
-                    accel_selector.d = 0
-                    states.d = States.B_RIGHT_DIR_IDLE
+                    // Reset everything when button is released
+                    accel_timer.d = 0;
+                    accel_level.d = 0;
+                    accel_counter.d = 0;
+                    states.d = States.B_RIGHT_DIR_IDLE;
                 }
                 debug_dff.d = 81
 
